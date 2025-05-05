@@ -4,7 +4,7 @@ export default function IngredientsList(props) {
   ));
   return (
     <section>
-      <h2>Ingredients on hand:</h2>
+      <h2>Ingredients on hand(At lest 4 to get recipe):</h2>
       <ul className="ingredients-list" aria-live="polite">
         {ingredientsListItems}
       </ul>
