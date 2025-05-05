@@ -4,7 +4,7 @@ export default function Header() {
   return (
     <header>
       <img src={chefClaudeLogo} />
-      <h1>Chef Racepie by GIEST</h1>
+      <h1>Hornish Recepie Maker</h1>
     </header>
   );
 }

@@ -13,7 +13,7 @@ export async function getRecipeFromTogether(ingredientsArr) {
           {
             role: "system",
             content:
-              "You are a recipe assistant. Suggest a recipe based on the ingredients provided. Format the recipe in Markdown.",
+              "You are a recipe assistant. Suggest a recipe for Hornesh based on the ingredients provided. Format the recipe in Markdown dont forget to greet Hornesh.",
           },
           {
             role: "user",
