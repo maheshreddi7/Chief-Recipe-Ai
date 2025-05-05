@@ -1,7 +1,7 @@
 import React from "react";
 import IngredientsList from "./components/IngredientsList";
 import ClaudeRecipe from "./components/ClaudeRecipe";
-import { getRecipeFromMistral } from "./ai";
+import { getRecipeFromTogether } from "./ai";
 
 export default function Main() {
   const [ingredients, setIngredients] = React.useState([
@@ -14,8 +14,13 @@ export default function Main() {
   const [recipe, setRecipe] = React.useState("");
 
   async function getRecipe() {
-    const recipeMarkdown = await getRecipeFromMistral(ingredients);
-    setRecipe(recipeMarkdown);
+    try {
+      const recipeMarkdown = await getRecipeFromTogether(ingredients); // Make sure `ingredients` is defined in the scope
+      setRecipe(recipeMarkdown); // Update state with the fetched recipe
+    } catch (error) {
+      console.error("Failed to fetch recipe:", error);
+      // Optionally add error handling UI or fallback behavior here
+    }
   }
 
   function handleSubmit(e) {
