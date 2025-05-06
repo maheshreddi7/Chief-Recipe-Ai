@@ -6,14 +6,21 @@ import { getRecipeFromTogether } from "./ai";
 export default function Main() {
   const [ingredients, setIngredients] = React.useState([]);
   const [recipe, setRecipe] = React.useState("");
+  const recipeSection = React.useRef(null);
+
+  React.useEffect(() => {
+    if (recipe !== "" && recipeSection.current !== null) {
+      recipeSection.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [recipe]);
 
   async function getRecipe() {
     try {
-      const recipeMarkdown = await getRecipeFromTogether(ingredients); // Make sure `ingredients` is defined in the scope
-      setRecipe(recipeMarkdown); // Update state with the fetched recipe
+      const recipeMarkdown = await getRecipeFromTogether(ingredients);
+      setRecipe(recipeMarkdown); 
     } catch (error) {
       console.error("Failed to fetch recipe:", error);
-      // Optionally add error handling UI or fallback behavior here
+     
     }
   }
 
@@ -38,7 +45,11 @@ export default function Main() {
       </form>
 
       {ingredients.length > 0 && (
-        <IngredientsList ingredients={ingredients} getRecipe={getRecipe} />
+        <IngredientsList
+          ref={recipeSection}
+          ingredients={ingredients}
+          getRecipe={getRecipe}
+        />
       )}
 
       {recipe && <ClaudeRecipe recipe={recipe} />}
