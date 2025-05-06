@@ -10,17 +10,22 @@ export default function Main() {
 
   React.useEffect(() => {
     if (recipe !== "" && recipeSection.current !== null) {
-      recipeSection.current.scrollIntoView({ behavior: "smooth" });
+      // recipeSection.current.scrollIntoView({ behavior: "smooth" });
+      const yCoord =
+        recipeSection.current.getBoundingClientRect().top + window.scrollY;
+      window.scroll({
+        top: yCoord,
+        behavior: "smooth",
+      });
     }
   }, [recipe]);
 
   async function getRecipe() {
     try {
       const recipeMarkdown = await getRecipeFromTogether(ingredients);
-      setRecipe(recipeMarkdown); 
+      setRecipe(recipeMarkdown);
     } catch (error) {
       console.error("Failed to fetch recipe:", error);
-     
     }
   }
 
